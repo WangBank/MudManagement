@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MudManagement.Server", "MudManagement.Server\MudManagement.Server.csproj", "{340068E0-E6B5-4FFE-A8CC-399EE6D0F450}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "mudmanagement.client", "mudmanagement.client\mudmanagement.client.esproj", "{B83E9EA4-0A62-426B-BA10-A7D4221466F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{340068E0-E6B5-4FFE-A8CC-399EE6D0F450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{340068E0-E6B5-4FFE-A8CC-399EE6D0F450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{340068E0-E6B5-4FFE-A8CC-399EE6D0F450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{340068E0-E6B5-4FFE-A8CC-399EE6D0F450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B83E9EA4-0A62-426B-BA10-A7D4221466F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B83E9EA4-0A62-426B-BA10-A7D4221466F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B83E9EA4-0A62-426B-BA10-A7D4221466F1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B83E9EA4-0A62-426B-BA10-A7D4221466F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B83E9EA4-0A62-426B-BA10-A7D4221466F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B83E9EA4-0A62-426B-BA10-A7D4221466F1}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3A64E2B6-D1E5-49F9-AD4A-7C9BFA9F7D74}
+	EndGlobalSection
+EndGlobal

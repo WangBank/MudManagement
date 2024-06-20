@@ -1,0 +1,6 @@
+@MudManagement.Server_HostAddress = http://localhost:5069
+
+GET {{MudManagement.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
