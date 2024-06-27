@@ -1,4 +1,4 @@
-namespace MudManagement.Server
+namespace MudManagement.Server.Models
 {
     public class WeatherForecast
     {

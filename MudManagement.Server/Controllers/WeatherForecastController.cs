@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MudManagement.Server.Models;
 
 namespace MudManagement.Server.Controllers
 {

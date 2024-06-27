@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using MudManagement.Server.Db;
+
 namespace MudManagement.Server
 {
     public class Program
@@ -13,6 +16,7 @@ namespace MudManagement.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSqlite<MudDbContext>(builder.Configuration.GetConnectionString("MudDbContext"));
 
             var app = builder.Build();
 
