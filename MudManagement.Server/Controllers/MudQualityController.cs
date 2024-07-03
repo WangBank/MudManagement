@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MudManagement.Server.Db;
+using MudManagement.Server.Models;
 
 namespace MudManagement.Server.Controllers
 {
@@ -18,11 +20,75 @@ namespace MudManagement.Server.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "GetBaseQuality")]
-        public IEnumerable<string> GetBaseQuality()
+
+        /// <summary>
+        /// 基础属性
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet( "get_mud_quality_jcsx")]
+        public IEnumerable<mud_quality_jcsx> get_mud_quality_jcsx(string city,string category)
         {
-            return new List<string> { "value1", "value2" };
+            var list = _context.mud_quality_jcsx.AsNoTracking().Where(w=>w.city== city && w.category == category).ToList();
+            return list;
         }
+
+        /// <summary>
+        /// 重金属
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet( "get_mud_quality_zjs")]
+        public IEnumerable<mud_quality_zjs> get_mud_quality_zjs(string city, string category)
+        {
+            var list = _context.mud_quality_zjs.AsNoTracking().Where(w => w.city == city && w.category == category).ToList();
+            return list;
+        }
+
+        /// <summary>
+        /// 多环芳烃
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet( "get_mud_quality_dhft")]
+        public IEnumerable<mud_quality_dhft> get_mud_quality_dhft(string city, string category)
+        {
+            var list = _context.mud_quality_dhft.AsNoTracking().Where(w => w.city == city && w.category == category).ToList();
+            return list;
+        }
+
+
+        /// <summary>
+        /// 抗生素
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet( "get_mud_quality_kss")]
+        public IEnumerable<mud_quality_kss> get_mud_quality_kss(string city, string category)
+        {
+            var list = _context.mud_quality_kss.AsNoTracking().Where(w => w.city == city && w.category == category).ToList();
+            return list;
+        }
+
+        /// <summary>
+        /// 消毒副产物
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet( "get_mud_quality_xdfcw")]
+        public IEnumerable<mud_quality_xdfcw> get_mud_quality_xdfcw(string city, string category)
+        {
+            var list = _context.mud_quality_xdfcw.AsNoTracking().Where(w => w.city == city && w.category == category).ToList();
+            return list;
+        }
+
+        /// <summary>
+        /// 资源属性
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet( "get_mud_quality_zysx")]
+        public IEnumerable<mud_quality_zysx> get_mud_quality_zysx(string city, string category)
+        {
+            var list = _context.mud_quality_zysx.AsNoTracking().Where(w => w.city == city && w.category == category).ToList();
+            return list;
+        }
+
+
     }
 }
 

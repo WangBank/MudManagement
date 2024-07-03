@@ -11,18 +11,18 @@ namespace MudManagement.Server.Models
         public string id { get; set; }
         public string? province { get; set; }
         public string? year { get; set; }
-        public string? chanliang { get; set; }
+        public float? chanliang { get; set; }
     }
 
     public class mud_quantity_wswn: base_quantity_entity_model
     {
-        public string? wushuiliang { get; set; }
-        public string? chanlv { get; set; }
+        public float? wushuiliang { get; set; }
+        public float? chanlv { get; set; }
     }
 
     public class mud_quantity_gqwn : base_quantity_entity_model
     {
-        public string? guandaochangdu { get; set; }
+        public float? guandaochangdu { get; set; }
     }
 
     public class base_quality_entity_model

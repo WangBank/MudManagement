@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MudManagement.Server.Db;
 using MudManagement.Server.Models;
 
@@ -18,10 +19,27 @@ namespace MudManagement.Server.Controllers
             _context = context;
         }
 
-        [HttpGet(Name = "GetBaseQuantity")]
-        public IEnumerable<string> GetChanlv()
+        /// <summary>
+        /// 污水污泥
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("get_mud_quantity_wswn")]
+        public IEnumerable<mud_quantity_wswn> get_mud_quantity_wswn(string province)
         {
-            return new List<string> { "value1", "value2" };
+            var list = _context.mud_quantity_wswn.AsNoTracking().Where(w=>w.province == province).ToList();
+            return list;
+        }
+
+
+        /// <summary>
+        /// 管渠污泥
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("get_mud_quantity_gqwn")]
+        public IEnumerable<mud_quantity_gqwn> get_mud_quantity_gqwn(string province)
+        {
+            var list = _context.mud_quantity_gqwn.AsNoTracking().Where(w => w.province == province).ToList();
+            return list;
         }
 
     }
