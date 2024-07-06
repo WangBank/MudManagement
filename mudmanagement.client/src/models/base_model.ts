@@ -95,3 +95,4 @@ interface mud_quality_zysx extends base_quality_entity_model {
 type AppProps = {
   pathname: string;
 };
+

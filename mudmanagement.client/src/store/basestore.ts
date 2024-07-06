@@ -6,6 +6,8 @@ export class baseStore {
   }
 
   @observable seleted_province: string = "上海市";
+  @observable seleted_city: string = "六安市";
+  @observable seleted_category: string = "污水污泥";
   @observable mud_quantity_wswn: mud_quantity_wswn[] = [];
   @observable mud_quantity_gqwn: mud_quantity_gqwn[] = [];
   @observable mud_quality_jcsx: mud_quality_jcsx[] = [];
@@ -23,21 +25,36 @@ export class baseStore {
   }
 
   @action
-  async get_table_data(pathname: string, city: string, category: string) {
+  update_seleted_city(seleted_city: string) {
+    runInAction(() => {
+      this.seleted_city = seleted_city;
+    });
+  }
+
+  @action
+  update_seleted_category(seleted_category: string) {
+    runInAction(() => {
+      this.seleted_category = seleted_category;
+    });
+  }
+
+  @action
+  async get_table_data(pathname: string, city: string='', category: string='') {
+    console.log(pathname, city, category);
     if (pathname == "/mudquality/jcsx") {
       await this.get_mud_quality_jcsx(city, category);
     }
 
-    if (pathname == "/mudquality/hjsx/zhjs") {
+    if (pathname == "/mudquality/hjsx/zjs") {
       await this.get_mud_quality_zjs(city, category);
     }
 
     if (pathname == "/mudquality/hjsx/kss") {
-      await this.get_mud_quality_dhft(city, category);
+      await this.get_mud_quality_kss(city, category);
     }
 
-    if (pathname == "/mudquality/hjsx/dhaj") {
-      await this.get_mud_quality_kss(city, category);
+    if (pathname == "/mudquality/hjsx/dhft") {
+      await this.get_mud_quality_dhft(city, category);
     }
 
     if (pathname == "/mudquality/hjsx/xdfcw") {
@@ -116,7 +133,7 @@ export class baseStore {
   }
 
   @action
-  async get_chart_data(province: string, pathname: string) {
+  async get_chart_data(pathname: string, province: string='') {
     if (pathname == "/mudquantity/gqwn/chanliang") {
       await this.get_mud_quantity_gqwn(province);
     } else {

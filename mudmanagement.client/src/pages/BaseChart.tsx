@@ -7,7 +7,8 @@ import store from '../store/basestore';
 const BaseChart: React.FC<AppProps> = observer((props) => {
 
   useEffect(() => {
-    store.get_chart_data('上海市', props.pathname);
+    const { seleted_province } = store;
+    store.get_chart_data(props.pathname, seleted_province || '上海市');
   }, []);
   return (
     <>
@@ -25,7 +26,7 @@ const BaseChart: React.FC<AppProps> = observer((props) => {
             value={store.seleted_province}
             onChange={(value) => {
               store.update_seleted_province(value);
-              store.get_chart_data(value, props.pathname);
+              store.get_chart_data(props.pathname, value);
             }
             }
             options={[
@@ -75,10 +76,10 @@ const BaseChart: React.FC<AppProps> = observer((props) => {
               },
             ]}
           />
-          </Col>
+        </Col>
         <Col span={12}>
-          {props.pathname != '/mudquantity/gqwn/chanliang' && <Column data={store.mud_quantity_wswn} height={400} xField={'year'} yField={props.pathname == '/mudquantity/wswn/chanliang' ? 'chanliang' : 'chanlv'} />}
-          {props.pathname == '/mudquantity/gqwn/chanliang' && <Column data={store.mud_quantity_gqwn} height={400} xField={'year'} yField={'chanliang'} />}
+          {props.pathname != '/mudquantity/gqwn/chanliang' && <Column title={props.pathname == '/mudquantity/wswn/chanliang' ? "污水污泥-产量" : "污水污泥-产率"} data={store.mud_quantity_wswn} height={800} xField={'year'} yField={props.pathname == '/mudquantity/wswn/chanliang' ? 'chanliang' : 'chanlv'} />}
+          {props.pathname == '/mudquantity/gqwn/chanliang' && <Column title={"管渠污泥-产量"} data={store.mud_quantity_gqwn} height={400} xField={'year'} yField={'chanliang'} />}
         </Col>
       </Row>
 

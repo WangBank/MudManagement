@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using MudManagement.Server.Db;
 using MudManagement.Server.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MudManagement.Server.Controllers
 {
@@ -24,9 +25,15 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quantity_wswn")]
-        public IEnumerable<mud_quantity_wswn> get_mud_quantity_wswn(string province)
+        public IEnumerable<mud_quantity_wswn> get_mud_quantity_wswn(string? province)
         {
-            var list = _context.mud_quantity_wswn.AsNoTracking().Where(w=>w.province == province).ToList();
+            
+            var query = _context.mud_quantity_wswn.AsNoTracking();
+            if (!string.IsNullOrEmpty(province))
+            {
+                query = query.Where(w => w.province == province);
+            }
+            var list = query.ToList();
             return list;
         }
 
@@ -36,9 +43,14 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quantity_gqwn")]
-        public IEnumerable<mud_quantity_gqwn> get_mud_quantity_gqwn(string province)
+        public IEnumerable<mud_quantity_gqwn> get_mud_quantity_gqwn(string? province)
         {
-            var list = _context.mud_quantity_gqwn.AsNoTracking().Where(w => w.province == province).ToList();
+            var query = _context.mud_quantity_gqwn.AsNoTracking();
+            if (!string.IsNullOrEmpty(province))
+            {
+                query = query.Where(w => w.province == province);
+            }
+            var list = query.ToList();
             return list;
         }
 

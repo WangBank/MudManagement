@@ -12,7 +12,7 @@ import { observer } from 'mobx-react-lite';
 import store from './store/basestore';
 
 const App: React.FC<any> =
-    observer((props) => {
+    observer(() => {
         const [settings] = useState<Partial<ProSettings> | undefined>({
             layout: 'side',
             navTheme: "light",
@@ -71,10 +71,10 @@ const App: React.FC<any> =
                             onClick={() => {
                                 setPathname(item.path || '/');
                                 if (item.path.indexOf("mudquality") > -1) {
-
+                                    store.get_table_data(item.path || '/', store.seleted_city, store.seleted_category);
                                 }
                                 else {
-                                    store.get_chart_data('上海市', item.path || '/');
+                                    store.get_chart_data(item.path || '/', store.seleted_province);
                                 }
                             }}
                         >
@@ -87,7 +87,7 @@ const App: React.FC<any> =
                         <ProCard
                             style={{
                                 height: '80vh',
-                                minHeight: 600,
+                                minHeight: 900,
                             }}
                         >
                             {pathname.indexOf("mudquality") > -1 ? <BaseTable pathname={pathname} /> : <BaseChart pathname={pathname} />}

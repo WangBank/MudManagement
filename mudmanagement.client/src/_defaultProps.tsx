@@ -63,12 +63,12 @@ export default {
                         icon: <CrownFilled />,
                         routes: [
                             {
-                                path: '/mudquality/hjsx/zhjs',
+                                path: '/mudquality/hjsx/zjs',
                                 name: '重金属',
                                 icon: <CrownFilled />,
                             },
                             {
-                                path: '/mudquality/hjsx/dhaj',
+                                path: '/mudquality/hjsx/dhft',
                                 name: '多环芳烃',
                                 icon: <CrownFilled />,
                             },
@@ -78,7 +78,7 @@ export default {
                                 icon: <CrownFilled />,
                             },
                             {
-                                path: '/mudquality/hjsx/xdy',
+                                path: '/mudquality/hjsx/xdfcw',
                                 name: '消毒副产物',
                                 icon: <CrownFilled />,
                             },
