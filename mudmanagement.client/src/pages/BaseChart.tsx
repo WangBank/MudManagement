@@ -17,7 +17,7 @@ const BaseChart: React.FC<AppProps> = observer((props) => {
           <Select
             showSearch
             allowClear={true}
-            style={{ width: 200 }}
+            style={{ width: 150 }}
             placeholder="搜索相应的省份或城市"
             optionFilterProp="label"
             filterSort={(optionA, optionB) =>
@@ -77,9 +77,10 @@ const BaseChart: React.FC<AppProps> = observer((props) => {
             ]}
           />
         </Col>
+        <Col span={20}></Col>
         <Col span={12}>
-          {props.pathname != '/mudquantity/gqwn/chanliang' && <Column title={props.pathname == '/mudquantity/wswn/chanliang' ? "污水污泥-产量" : "污水污泥-产率"} data={store.mud_quantity_wswn} height={800} xField={'year'} yField={props.pathname == '/mudquantity/wswn/chanliang' ? 'chanliang' : 'chanlv'} />}
-          {props.pathname == '/mudquantity/gqwn/chanliang' && <Column title={"管渠污泥-产量"} data={store.mud_quantity_gqwn} height={400} xField={'year'} yField={'chanliang'} />}
+          {props.pathname != '/mudquantity/gqwn/chanliang' && <Column title={props.pathname == '/mudquantity/wswn/chanliang' ? "污水污泥-产量" : "污水污泥-产率"} data={store.mud_quantity_wswn} height={500} xField={'year'} yField={props.pathname == '/mudquantity/wswn/chanliang' ? 'chanliang' : 'chanlv'} />}
+          {props.pathname == '/mudquantity/gqwn/chanliang' && <Column title={"管渠污泥-产量"} data={store.mud_quantity_gqwn} height={500} xField={'year'} yField={'chanliang'} />}
         </Col>
       </Row>
 

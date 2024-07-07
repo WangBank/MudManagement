@@ -18,9 +18,10 @@ const BaseTable: React.FC<AppProps> = observer((props) => {
           <Select
             showSearch
             allowClear={true}
-            style={{ width: 200 }}
+            style={{ width: 150 }}
             placeholder="请选择城市"
             optionFilterProp="label"
+            defaultValue=''
             value={store.seleted_city}
             onChange={(value) => {
               store.update_seleted_city(value);
@@ -50,7 +51,7 @@ const BaseTable: React.FC<AppProps> = observer((props) => {
           <Select
             showSearch
             allowClear={true}
-            style={{ width: 200 }}
+            style={{ width: 150 }}
             placeholder="请选择类型"
             optionFilterProp="label"
             value={store.seleted_category}
@@ -86,7 +87,7 @@ const BaseTable: React.FC<AppProps> = observer((props) => {
             rowKey="id"
             columns={mud_quality_jcsx_columns}
             dataSource={store.mud_quality_jcsx}
-            scroll={{ x: 2500, y: 700 }}
+            scroll={{ x: 1500, y: 700 }}
             sticky={{ offsetHeader: 64 }}
           />}
 
@@ -102,7 +103,7 @@ const BaseTable: React.FC<AppProps> = observer((props) => {
             rowKey="id"
             columns={mud_quality_kss_columns}
             dataSource={store.mud_quality_kss}
-            scroll={{ x: 2500, y: 700 }}
+            scroll={{ x: 2700, y: 700 }}
             sticky={{ offsetHeader: 64 }}
           />}
 
@@ -110,7 +111,7 @@ const BaseTable: React.FC<AppProps> = observer((props) => {
             rowKey="id"
             columns={mud_quality_dhft_columns}
             dataSource={store.mud_quality_dhft}
-            scroll={{ x: 2500, y: 700 }}
+            scroll={{ x: 3500, y: 700 }}
             sticky={{ offsetHeader: 64 }}
           />}
 
@@ -118,7 +119,7 @@ const BaseTable: React.FC<AppProps> = observer((props) => {
             rowKey="id"
             columns={mud_quality_xdfcw_columns}
             dataSource={store.mud_quality_xdfcw}
-            scroll={{ x: 2500, y: 700 }}
+            scroll={{ x: 1500, y: 700 }}
             sticky={{ offsetHeader: 64 }}
           />}
 
@@ -126,7 +127,7 @@ const BaseTable: React.FC<AppProps> = observer((props) => {
             rowKey="id"
             columns={mud_quality_zysx_columns}
             dataSource={store.mud_quality_zysx}
-            scroll={{ x: 2500, y: 700 }}
+            scroll={{ x: 1500, y: 700 }}
             sticky={{ offsetHeader: 64 }}
           />}
 

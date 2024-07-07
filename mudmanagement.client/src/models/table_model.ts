@@ -2,21 +2,6 @@ import { TableColumnsType } from "antd";
 
 const base_quality_entity_model: TableColumnsType = [
   {
-    title: "污泥类别",
-    width: 50,
-    dataIndex: "category",
-    key: "category",
-    fixed: "left",
-
-  },
-  {
-    title: "城市",
-    width: 50,
-    dataIndex: "city",
-    key: "city",
-    fixed: "left",
-  },
-  {
     title: "日期",
     width: 50,
     dataIndex: "date",
@@ -32,21 +17,34 @@ const base_quality_entity_model: TableColumnsType = [
   },
   {
     title: "经度",
-    width: 50,
+    width: 30,
     dataIndex: "longitude",
     key: "longitude",
   },
   {
     title: "纬度",
-    width: 50,
+    width: 30,
     dataIndex: "latitude",
     key: "latitude",
   },
   {
     title: "类型",
-    width: 50,
+    width: 30,
     dataIndex: "type",
     key: "type",
+  },
+  {
+    title: "污泥类别",
+    width: 30,
+    dataIndex: "category",
+    key: "category",
+
+  },
+  {
+    title: "城市",
+    width: 30,
+    dataIndex: "city",
+    key: "city",
   },
 ];
 /*
@@ -142,7 +140,6 @@ export const mud_quality_zjs_columns: TableColumnsType<mud_quality_zjs> = [
     width: 50,
     dataIndex: "hg",
     key: "hg",
-    fixed: "right",
   },
 ];
 
@@ -167,53 +164,7 @@ export const mud_quality_zjs_columns: TableColumnsType<mud_quality_zjs> = [
 */
 
 export const mud_quality_dhft_columns: TableColumnsType<mud_quality_dhft> = [
- {
-    title: "污泥类别",
-    width: 50,
-    dataIndex: "category",
-    key: "category",
-    fixed: "left",
-    
-  },
-  {
-    title: "城市",
-    width: 50,
-    dataIndex: "city",
-    key: "city",
-    fixed: "left",
-  },
-  {
-    title: "日期",
-    width: 50,
-    dataIndex: "date",
-    key: "date",
-    fixed: "left",
-  },
-  {
-    title: "地点",
-    width: 50,
-    dataIndex: "location",
-    key: "location",
-    fixed: "left",
-  },
-  {
-    title: "经度",
-    width: 50,
-    dataIndex: "longitude",
-    key: "longitude",
-  },
-  {
-    title: "纬度",
-    width: 50,
-    dataIndex: "latitude",
-    key: "latitude",
-  },
-  {
-    title: "类型",
-    width: 50,
-    dataIndex: "type",
-    key: "type",
-  },
+  ...base_quality_entity_model,
   {
     title: "多环芳烃总量",
     width: 50,

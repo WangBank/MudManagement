@@ -30,6 +30,8 @@ namespace MudManagement.Server
                 app.UseSwaggerUI();
             }
 
+
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

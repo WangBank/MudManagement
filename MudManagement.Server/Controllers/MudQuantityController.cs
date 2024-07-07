@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using MudManagement.Server.Db;
 using MudManagement.Server.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MudManagement.Server.Controllers
 {
@@ -25,15 +24,23 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quantity_wswn")]
-        public IEnumerable<mud_quantity_wswn> get_mud_quantity_wswn(string? province)
+        public IEnumerable<mud_quantity_wswn_view_model> get_mud_quantity_wswn(string? province)
         {
-            
+
             var query = _context.mud_quantity_wswn.AsNoTracking();
             if (!string.IsNullOrEmpty(province))
             {
                 query = query.Where(w => w.province == province);
             }
-            var list = query.ToList();
+            var list = query.ToList().Select(s => new mud_quantity_wswn_view_model
+            {
+                id = s.id,
+                chanliang = s.chanliang,
+                chanlv = s.chanlv,
+                province = s.province,
+                wushuiliang = s.wushuiliang,
+                year = s.year
+            });
             return list;
         }
 
@@ -43,14 +50,21 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quantity_gqwn")]
-        public IEnumerable<mud_quantity_gqwn> get_mud_quantity_gqwn(string? province)
+        public IEnumerable<mud_quantity_gqwn_view_model> get_mud_quantity_gqwn(string? province)
         {
             var query = _context.mud_quantity_gqwn.AsNoTracking();
             if (!string.IsNullOrEmpty(province))
             {
                 query = query.Where(w => w.province == province);
             }
-            var list = query.ToList();
+            var list = query.ToList().Select(s => new mud_quantity_gqwn_view_model
+            {
+                id = s.id,
+                chanliang = s.chanliang,
+                guandaochangdu = s.guandaochangdu,
+                province = s.province,
+                year = s.year
+            });
             return list;
         }
 
