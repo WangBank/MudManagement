@@ -10,20 +10,20 @@ import BaseTable from './pages/BaseTable';
 import BaseChart from './pages/BaseChart';
 import { observer } from 'mobx-react-lite';
 import store from './store/basestore';
-
 const App: React.FC<any> =
     observer(() => {
         const [settings] = useState<Partial<ProSettings> | undefined>({
-            layout: 'side',
-            navTheme: "light",
-            contentWidth: "Fluid",
+            layout: 'mix',
+            // copy from pro site
+            navTheme: 'light',
+            contentWidth: 'Fluid',
+            splitMenus: true,
+            fixedHeader: true,
             fixSiderbar: true,
-            colorPrimary: "#13C2C2",
-            splitMenus: false,
-            fixedHeader: false,
-            siderMenuType: "sub",
-
+            title: '长江经济带城市 多源污泥泥量和泥质 基础数据库',
+            siderMenuType: "sub"
         });
+
         const [pathname, setPathname] = useState('/mudquantity/wswn/chanliang');
         return (
 
@@ -34,6 +34,29 @@ const App: React.FC<any> =
                 }}
             >
                 <ProLayout
+                    token={{
+                        header: {
+                            colorBgHeader: '#304156',
+                            colorHeaderTitle: '#fff',
+                            colorTextMenu: '#dfdfdf',
+                            colorTextMenuSecondary: '#dfdfdf',
+                            colorTextMenuSelected: '#fff',
+                            colorBgMenuItemSelected: '#22272b',
+                            colorTextRightActionsItem: '#dfdfdf',
+                            colorBgMenuItemHover: '#fff',
+                        },
+                        sider: {
+                            colorMenuBackground: '#304156',
+                            colorMenuItemDivider: '#fff',
+                            colorTextMenu: '#dfdfdf',
+                            colorTextMenuSecondary: '#dfdfdf',
+                            colorTextMenuSelected: '#fff',
+                            colorBgMenuItemSelected: '#22272b',
+                            colorTextMenuItemHover: '#fff',
+                            colorBgMenuItemHover: '#304156',
+                        },
+                        colorPrimary: '#1890ff',
+                    }}
                     siderWidth={256}
                     bgLayoutImgList={[
                         {
@@ -60,10 +83,16 @@ const App: React.FC<any> =
                         pathname,
                     }}
                     logo={false}
-                    title="泥量泥质"
                     menu={{
-                        type: 'group',
+                        type: 'sub',
                         autoClose: false,
+                    }}
+                    locale={"zh-CN"}
+                    onMenuHeaderClick={() => {
+                        window.location.href = '/';
+                    }}
+                    style={{
+                        backgroundColor: 'black',
                     }}
 
                     menuItemRender={(item, dom) => (
@@ -71,7 +100,7 @@ const App: React.FC<any> =
                             onClick={() => {
                                 setPathname(item.path || '/');
                                 if (item.path.indexOf("mudquality") > -1) {
-                                    store.get_table_data(item.path || '/', store.seleted_city, store.seleted_category);
+                                    store.get_table_data(item.path || '/', '', '');
                                 }
                                 else {
                                     store.get_chart_data(item.path || '/', store.seleted_province);

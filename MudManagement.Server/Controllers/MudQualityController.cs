@@ -29,7 +29,7 @@ namespace MudManagement.Server.Controllers
         [HttpGet("get_mud_quality_jcsx")]
         public IEnumerable<mud_quality_jcsx_view_model> get_mud_quality_jcsx(string? city, string? category)
         {
-            var query = _context.mud_quality_jcsx.AsNoTracking();
+            var query = _context.mud_quality_jcsx.AsNoTracking().Where(w=> !string.IsNullOrEmpty(w.youjizhi) || !string.IsNullOrEmpty(w.hanshaliang) || !string.IsNullOrEmpty(w.hanshuilv) || !string.IsNullOrEmpty(w.ph));
             if (!string.IsNullOrEmpty(city))
             {
                 query = query.Where(w => w.city == city);
@@ -42,7 +42,7 @@ namespace MudManagement.Server.Controllers
             {
                 category = s.category,
                 city = s.city,
-                date = s.date,
+                date = s.date?.TruncateToFiveIfLonger(10),
                 hanshaliang = s.hanshaliang?.TruncateToFiveIfLonger(),
                 hanshuilv = s.hanshuilv?.TruncateToFiveIfLonger(),
                 id = s.id,
@@ -56,6 +56,7 @@ namespace MudManagement.Server.Controllers
             return list;
         }
 
+
         /// <summary>
         /// 重金属
         /// </summary>
@@ -63,7 +64,7 @@ namespace MudManagement.Server.Controllers
         [HttpGet("get_mud_quality_zjs")]
         public IEnumerable<mud_quality_zjs_view_model> get_mud_quality_zjs(string? city, string? category)
         {
-            var query = _context.mud_quality_zjs.AsNoTracking();
+            var query = _context.mud_quality_zjs.AsNoTracking().Where(w=> !string.IsNullOrEmpty(w.zn) || !string.IsNullOrEmpty(w.cu) || !string.IsNullOrEmpty(w.As) || !string.IsNullOrEmpty(w.Pb) || !string.IsNullOrEmpty(w.cd) || !string.IsNullOrEmpty(w.cr) || !string.IsNullOrEmpty(w.ni) || !string.IsNullOrEmpty(w.hg) );
             if (!string.IsNullOrEmpty(city))
             {
                 query = query.Where(w => w.city == city);
@@ -77,7 +78,7 @@ namespace MudManagement.Server.Controllers
                 id = s.id,
                 category = s.category,
                 city = s.city,
-                date = s.date,
+                date = s.date?.TruncateToFiveIfLonger(10),
                 location = s.location,
                 longitude = s.longitude,
                 latitude = s.latitude,
@@ -101,7 +102,9 @@ namespace MudManagement.Server.Controllers
         [HttpGet("get_mud_quality_dhft")]
         public IEnumerable<mud_quality_dhft_view_model> get_mud_quality_dhft(string? city, string? category)
         {
-            var query = _context.mud_quality_dhft.AsNoTracking();
+            var query = _context.mud_quality_dhft.AsNoTracking().Where(w =>  !string.IsNullOrEmpty(w.e) || !string.IsNullOrEmpty(w.exi) || !string.IsNullOrEmpty(w.fei) || !string.IsNullOrEmpty(w.nai) || !string.IsNullOrEmpty(w.qu) || !string.IsNullOrEmpty(w.benbingbei) || !string.IsNullOrEmpty(w.wu)
+                || !string.IsNullOrEmpty(w.benbingbyingen) || !string.IsNullOrEmpty(w.benbingen) || !string.IsNullOrEmpty(w.benbingkyingen) || !string.IsNullOrEmpty(w.bi) || !string.IsNullOrEmpty(w.en) || !string.IsNullOrEmpty(w.erbenbingen) || !string.IsNullOrEmpty(w.yinbingbi) || !string.IsNullOrEmpty(w.yingen) || !string.IsNullOrEmpty(w.zl)
+            );
             if (!string.IsNullOrEmpty(city))
             {
                 query = query.Where(w => w.city == city);
@@ -115,7 +118,7 @@ namespace MudManagement.Server.Controllers
                 benbingbei = s.benbingbei?.TruncateToFiveIfLonger(),
                 category = s.category,
                 city = s.city,
-                date = s.date,
+                date = s.date?.TruncateToFiveIfLonger(10),
                 e = s.e?.TruncateToFiveIfLonger(),
                 exi = s.exi?.TruncateToFiveIfLonger(),
                 fei = s.fei?.TruncateToFiveIfLonger(),
@@ -149,7 +152,9 @@ namespace MudManagement.Server.Controllers
         [HttpGet("get_mud_quality_kss")]
         public IEnumerable<mud_quality_kss_view_model> get_mud_quality_kss(string? city, string? category)
         {
-            var query = _context.mud_quality_kss.AsNoTracking();
+            var query = _context.mud_quality_kss.AsNoTracking().Where(w=>
+                !string.IsNullOrEmpty(w.shs) || !string.IsNullOrEmpty(w.aqms) || !string.IsNullOrEmpty(w.hacd) || !string.IsNullOrEmpty(w.hajec) || !string.IsNullOrEmpty(w.hajmd) || !string.IsNullOrEmpty(w.hamd) || !string.IsNullOrEmpty(w.hbsx) || !string.IsNullOrEmpty(w.hms) || !string.IsNullOrEmpty(w.klms) || !string.IsNullOrEmpty(w.lhms) || !string.IsNullOrEmpty(w.nfsx) || !string.IsNullOrEmpty(w.tms) || !string.IsNullOrEmpty(w.yfsx)
+            );
             if (!string.IsNullOrEmpty(city))
             {
                 query = query.Where(w => w.city == city);
@@ -165,7 +170,7 @@ namespace MudManagement.Server.Controllers
                 aqms = s.aqms?.TruncateToFiveIfLonger(),
                 category = s.category,
                 city = s.city,
-                date = s.date,
+                date = s.date?.TruncateToFiveIfLonger(10),
                 hacd = s.hacd?.TruncateToFiveIfLonger(),
                 hajec = s.hajec?.TruncateToFiveIfLonger(),
                 hajmd = s.hajmd?.TruncateToFiveIfLonger(),
@@ -192,7 +197,10 @@ namespace MudManagement.Server.Controllers
         [HttpGet("get_mud_quality_xdfcw")]
         public IEnumerable<mud_quality_xdfcw_view_model> get_mud_quality_xdfcw(string? city, string? category)
         {
-            var query = _context.mud_quality_xdfcw.AsNoTracking();
+            var query = _context.mud_quality_xdfcw.AsNoTracking().Where(
+                w=>
+                !string.IsNullOrEmpty(w.sljw) || !string.IsNullOrEmpty(w.slys) || !string.IsNullOrEmpty(w.lys)
+                );
             if (!string.IsNullOrEmpty(city))
             {
                 query = query.Where(w => w.city == city);
@@ -208,7 +216,7 @@ namespace MudManagement.Server.Controllers
                 slys = s.slys?.TruncateToFiveIfLonger(),
                 category = s.category,
                 city = s.city,
-                date = s.date,
+                date = s.date?.TruncateToFiveIfLonger(10),
                 lys = s.lys?.TruncateToFiveIfLonger(),
                 location = s.location,
                 longitude = s.longitude,
@@ -226,7 +234,10 @@ namespace MudManagement.Server.Controllers
         [HttpGet("get_mud_quality_zysx")]
         public IEnumerable<mud_quality_zysx_view_model> get_mud_quality_zysx(string? city, string? category)
         {
-            var query = _context.mud_quality_zysx.AsNoTracking();
+            var query = _context.mud_quality_zysx.AsNoTracking().Where(
+                w=>
+                !string.IsNullOrEmpty(w.zd) || !string.IsNullOrEmpty(w.zl) || !string.IsNullOrEmpty(w.zj) || !string.IsNullOrEmpty(w.zyf)
+                );
             if (!string.IsNullOrEmpty(city))
             {
                 query = query.Where(w => w.city == city);
@@ -240,7 +251,7 @@ namespace MudManagement.Server.Controllers
                 id = s.id,
                 category = s.category,
                 city = s.city,
-                date = s.date,
+                date = s.date?.TruncateToFiveIfLonger(10),
                 latitude = s.latitude,
                 location = s.location,
                 longitude = s.longitude,

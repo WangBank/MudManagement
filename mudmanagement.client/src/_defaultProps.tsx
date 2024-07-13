@@ -10,7 +10,7 @@ export default {
         routes: [
             {
                 path: '/mudquantity',
-                name: '泥量',
+                name: '多源污泥泥量',
                 icon: <CrownFilled />,
                 routes: [
                     {
@@ -21,13 +21,11 @@ export default {
                             {
                                 path: '/mudquantity/wswn/chanliang',
                                 name: '产量',
-                                icon: <CrownFilled />,
                                 component: './pages/BaseChart',
                             },
                             {
                                 path: '/mudquantity/wswn/chanlv',
                                 name: '产率',
-                                icon: <CrownFilled />,
                                 component: './pages/BaseChart',
                             }
                         ],
@@ -40,7 +38,6 @@ export default {
                             {
                                 path: '/mudquantity/gqwn/chanliang',
                                 name: '产量',
-                                icon: <CrownFilled />,
                                 component: './pages/BaseChart',
                             },
                         ],
@@ -48,7 +45,7 @@ export default {
                 ],
             },
             {
-                name: '泥质',
+                name: '多源污泥泥质',
                 icon: <TabletFilled />,
                 path: '/mudquality',
                 routes: [
