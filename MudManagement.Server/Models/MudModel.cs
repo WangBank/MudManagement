@@ -23,6 +23,17 @@ namespace MudManagement.Server.Models
     public class mud_quantity_gqwn : base_quantity_entity_model
     {
         public float? guandaochangdu { get; set; }
+        public float? chanlv { get; set; }
+    }
+
+    public class mud_quantity_wswn_czqk : base_quantity_entity_model
+    {
+        public float? zj { get; set; }
+        public float? tdly { get; set; }
+        public float? jcly { get; set; }
+        public float? fs { get; set; }
+        public float? tm { get; set; }
+        public float? qt { get; set; }
     }
 
     public class base_quality_entity_model

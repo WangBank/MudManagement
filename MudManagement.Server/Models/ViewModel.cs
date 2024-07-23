@@ -10,6 +10,7 @@ namespace MudManagement.Server.Models
         public string? province { get; set; }
         public string? year { get; set; }
         public float? chanliang { get; set; }
+        public float? chanlv { get; set; }
     }
 
     public class mud_quantity_wswn_view_model : base_quantity_view_model
@@ -21,6 +22,16 @@ namespace MudManagement.Server.Models
     public class mud_quantity_gqwn_view_model : base_quantity_view_model
     {
         public float? guandaochangdu { get; set; }
+    }
+
+    public class mud_quantity_wswn_czqk_view_model : base_quantity_view_model
+    {
+        public float? zj { get; set; }
+        public float? tdly { get; set; }
+        public float? jcly { get; set; }
+        public float? fs { get; set; }
+        public float? tm { get; set; }
+        public float? qt { get; set; }
     }
 
     public class base_quality_view_model

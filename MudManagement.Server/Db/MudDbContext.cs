@@ -15,6 +15,7 @@ namespace MudManagement.Server.Db
         public DbSet<mud_quality_kss> mud_quality_kss { get; set; }
         public DbSet<mud_quality_xdfcw> mud_quality_xdfcw { get; set; }
         public DbSet<mud_quality_zysx> mud_quality_zysx { get; set; }
+        public DbSet<mud_quantity_wswn_czqk> mud_quantity_wswn_czqk { get; set; }
 
         public MudDbContext(DbContextOptions<MudDbContext> options)
            : base(options)
@@ -31,6 +32,10 @@ namespace MudManagement.Server.Db
                 .Property(e => e.id)
                 .HasColumnType("TEXT")
                 .HasDefaultValueSql("uuid()");
+            modelBuilder.Entity<mud_quantity_wswn_czqk>()
+               .Property(e => e.id)
+               .HasColumnType("TEXT")
+               .HasDefaultValueSql("uuid()");
             modelBuilder.Entity<mud_quality_jcsx>()
                 .Property(e => e.id)
                 .HasColumnType("TEXT")

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MudManagement.Server.Db;
 
@@ -10,9 +11,11 @@ using MudManagement.Server.Db;
 namespace MudManagement.Server.Migrations
 {
     [DbContext(typeof(MudDbContext))]
-    partial class MudDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240718102220_addmud_quantity_wswn_czqk")]
+    partial class addmud_quantity_wswn_czqk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
@@ -370,9 +373,6 @@ namespace MudManagement.Server.Migrations
                         .HasDefaultValueSql("uuid()");
 
                     b.Property<float?>("chanliang")
-                        .HasColumnType("REAL");
-
-                    b.Property<float?>("chanlv")
                         .HasColumnType("REAL");
 
                     b.Property<float?>("guandaochangdu")

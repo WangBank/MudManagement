@@ -2,16 +2,27 @@ interface base_quantity_entity_model {
   id: string;
   province: string;
   year: string;
-  chanliang: number;
 }
 
 interface mud_quantity_wswn extends base_quantity_entity_model {
   wushuiliang: number;
   chanlv: number;
+  chanliang: number;
 }
 
 interface mud_quantity_gqwn extends base_quantity_entity_model {
   guandaochangdu: number;
+  chanliang: number;
+  chanlv: number;
+}
+
+interface mud_quantity_wswn_czqk extends base_quantity_entity_model {
+  zj: number;
+  tdly: number;
+  jcly: number;
+  fs: number;
+  tm: number;
+  qt: number;
 }
 
 interface base_quality_entity_model {
@@ -95,4 +106,3 @@ interface mud_quality_zysx extends base_quality_entity_model {
 type AppProps = {
   pathname: string;
 };
-

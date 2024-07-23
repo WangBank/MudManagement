@@ -10,6 +10,8 @@ import BaseTable from './pages/BaseTable';
 import BaseChart from './pages/BaseChart';
 import { observer } from 'mobx-react-lite';
 import store from './store/basestore';
+import { Card, Col, Divider, Row, Typography } from 'antd';
+const { Title, Link } = Typography;
 const App: React.FC<any> =
     observer(() => {
         const [settings] = useState<Partial<ProSettings> | undefined>({
@@ -17,16 +19,15 @@ const App: React.FC<any> =
             // copy from pro site
             navTheme: 'light',
             contentWidth: 'Fluid',
-            splitMenus: true,
+            splitMenus: false,
             fixedHeader: true,
             fixSiderbar: true,
-            title: '长江经济带城市 多源污泥泥量和泥质 基础数据库',
-            siderMenuType: "sub"
+            title: '',
+            siderMenuType: "sub",
         });
-
-        const [pathname, setPathname] = useState('/mudquantity/wswn/chanliang');
-        return (
-
+        const [pathname, setPathname] = useState('');
+        const { Meta } = Card;
+        const routes = (
             <div
                 id="test-pro-layout"
                 style={{
@@ -36,26 +37,25 @@ const App: React.FC<any> =
                 <ProLayout
                     token={{
                         header: {
-                            colorBgHeader: '#304156',
+                            colorBgHeader: '#292f33',
                             colorHeaderTitle: '#fff',
                             colorTextMenu: '#dfdfdf',
                             colorTextMenuSecondary: '#dfdfdf',
                             colorTextMenuSelected: '#fff',
                             colorBgMenuItemSelected: '#22272b',
+                            colorTextMenuActive: 'rgba(255,255,255,0.85)',
                             colorTextRightActionsItem: '#dfdfdf',
-                            colorBgMenuItemHover: '#fff',
                         },
+                        colorTextAppListIconHover: '#fff',
+                        colorTextAppListIcon: '#dfdfdf',
                         sider: {
-                            colorMenuBackground: '#304156',
-                            colorMenuItemDivider: '#fff',
-                            colorTextMenu: '#dfdfdf',
-                            colorTextMenuSecondary: '#dfdfdf',
-                            colorTextMenuSelected: '#fff',
-                            colorBgMenuItemSelected: '#22272b',
-                            colorTextMenuItemHover: '#fff',
-                            colorBgMenuItemHover: '#304156',
+                            colorMenuBackground: '#fff',
+                            colorMenuItemDivider: '#dfdfdf',
+                            colorBgMenuItemHover: '#f6f6f6',
+                            colorTextMenu: '#595959',
+                            colorTextMenuSelected: '#242424',
+                            colorTextMenuActive: '#242424',
                         },
-                        colorPrimary: '#1890ff',
                     }}
                     siderWidth={256}
                     bgLayoutImgList={[
@@ -89,21 +89,69 @@ const App: React.FC<any> =
                     }}
                     locale={"zh-CN"}
                     onMenuHeaderClick={() => {
-                        window.location.href = '/';
+                        window.location.href = '/dashboard';
                     }}
                     style={{
                         backgroundColor: 'black',
                     }}
+                    headerContentRender={() => (
+                        <div style={{
+                            textAlign: 'center',
+                        }}>
+                            <Title
+                                level={3}
+                                onClick={() => {
+                                    window.location.href = '/dashboard';
+                                }}
+                                type='success'>
+                                <Link style={{
+                                    color: 'white',
+                                    fontSize: 20,
+                                }}>
+                                    长江经济带城市 多源污泥泥量和泥质 基础数据库
+                                </Link>
+
+                            </Title>
+                        </div>
+                    )}
 
                     menuItemRender={(item, dom) => (
                         <div
                             onClick={() => {
-                                setPathname(item.path || '/');
                                 if (item.path.indexOf("mudquality") > -1) {
-                                    store.get_table_data(item.path || '/', '', '');
+                                    let selected_category = '';
+                                    if (item.path.indexOf('/mudquality/wswn') != -1) {
+                                        selected_category = '污水污泥';
+                                    }
+                                    if (item.path.indexOf('/mudquality/gqwn') != -1) {
+                                        selected_category = '管渠污泥';
+                                    }
+                                    if (item.path.indexOf('/mudquality/hhdn') != -1) {
+                                        selected_category = '河湖底泥';
+                                    }
+                                    if (item.path.indexOf('/mudquality/gcnj') != -1) {
+                                        selected_category = '工程泥浆';
+                                    }
+                                    store.update_selected_city('');
+                                    store.get_table_data(item.path || '/', '', selected_category);
+                                    if (item.path == '/mudquality') {
+                                        setPathname('/mudquality/jcsx');
+                                    }
+                                    else {
+                                        setPathname(item.path || '/');
+                                    }
+
                                 }
                                 else {
-                                    store.get_chart_data(item.path || '/', store.seleted_province);
+                                    store.get_chart_data(item.path || '/', '', '');
+                                    if (item.path == '/mudquantity') {
+                                        setPathname('/mudquantity/wswn/chanshengqingkuang');
+                                    }
+                                    else {
+                                        setPathname(item.path || '/');
+                                    }
+
+
                                 }
                             }}
                         >
@@ -116,15 +164,57 @@ const App: React.FC<any> =
                         <ProCard
                             style={{
                                 height: '80vh',
-                                minHeight: 900,
+                                minHeight: 800,
+                                // maxHeight: 400,
+                               // overflowY: 'auto',
                             }}
                         >
-                            {pathname.indexOf("mudquality") > -1 ? <BaseTable pathname={pathname} /> : <BaseChart pathname={pathname} />}
+                            {pathname == "" ? (
+                                <div style={{
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}>
+                                    <Divider style={{
+                                        height: 50
+                                    }}></Divider>
+                                    <Row gutter={16}>
+                                        <Col span={6}>
+                                        </Col>
+                                        <Col span={6}>
+                                            <Card bordered={true} hoverable={true} onClick={
+                                                () => {
+                                                    setPathname('/mudquantity/wswn/chanshengqingkuang');
+                                                }
+                                            }>
+                                                <Meta
+                                                    title="多源污泥泥量"
+                                                    description="点击跳转到多源污泥泥量页面"
+                                                />
+                                            </Card>
+                                        </Col>
+                                        <Col span={6}>
+                                            <Card bordered={true} hoverable={true} onClick={
+                                                () => {
+                                                    setPathname('/mudquality/wswn/jcsx');
+                                                }
+                                            }>
+                                                <Meta
+                                                    title="多源污泥泥质"
+                                                    description="点击跳转到多源污泥泥质页面"
+                                                />
+                                            </Card>
+                                        </Col>
+                                    </Row>
+                                </div>
+
+                            ) : pathname.indexOf("mudquality") > -1 ? <BaseTable pathname={pathname} /> : <BaseChart pathname={pathname} />}
                         </ProCard>
                     </PageContainer>
                 </ProLayout>
             </div>
-
+        )
+        return (
+            routes
         );
     });
 

@@ -1,5 +1,112 @@
 import { TableColumnsType } from "antd";
 
+const base_quantity_entity_model: TableColumnsType = [
+  {
+    title: "年份",
+    width: 30,
+    dataIndex: "year",
+    key: "year",
+    fixed: "left",
+  },
+  {
+    title: "省份",
+    width: 30,
+    dataIndex: "province",
+    key: "province",
+    fixed: "left",
+  },
+];
+
+export const mud_quantity_wswn_columns: TableColumnsType<mud_quantity_wswn> = [
+  ...base_quantity_entity_model,
+  {
+    title: "污水量",
+    width: 30,
+    dataIndex: "wushuiliang",
+    key: "wushuiliang",
+  },
+  {
+    title: "产率 (tDS/万m³)",
+    width: 30,
+    dataIndex: "chanlv",
+    key: "chanlv",
+  },
+  {
+    title: "产量 (tDS/a)",
+    width: 30,
+    dataIndex: "chanliang",
+    key: "chanliang",
+  }
+];
+
+export const mud_quantity_gqwn_columns: TableColumnsType<mud_quantity_gqwn> = [
+  ...base_quantity_entity_model,
+  {
+    title: "管道长度",
+    width: 30,
+    dataIndex: "guandaochangdu",
+    key: "guandaochangdu",
+  },
+  {
+    title: "产量 (tDS/a)",
+    width: 30,
+    dataIndex: "chanliang",
+    key: "chanliang",
+  },
+  {
+    title: "产率 (tDS/km)",
+    width: 30,
+    dataIndex: "chanlv",
+    key: "chanlv",
+  }
+];
+
+export const mud_quantity_wswn_czqk_columns: TableColumnsType<mud_quantity_wswn_czqk> = [
+  ...base_quantity_entity_model,
+  {
+    title: "总计",
+    width: 30,
+    dataIndex: "zj",
+    key: "zj",
+  },
+  {
+    title: "土地利用",
+    width: 30,
+    dataIndex: "tdly",
+    key: "tdly",
+  },
+  {
+    title: "建材利用",
+    width: 30,
+    dataIndex: "jcly",
+    key: "jcly",
+  },
+  //焚烧
+  {
+    title: "焚烧",
+    width: 30,
+    dataIndex: "fs",
+    key: "fs",
+  },
+  //填埋
+  {
+    title: "填埋",
+    width: 30,
+    dataIndex: "tm",
+    key: "tm",
+  },  
+  //其他
+  {
+    title: "其他",
+    width: 30,
+    dataIndex: "qt",
+    key: "qt",
+  },
+]
+
+
+
+
 const base_quality_entity_model: TableColumnsType = [
   {
     title: "日期",
@@ -33,13 +140,13 @@ const base_quality_entity_model: TableColumnsType = [
     dataIndex: "type",
     key: "type",
   },
-  {
-    title: "污泥类别",
-    width: 30,
-    dataIndex: "category",
-    key: "category",
+  // {
+  //   title: "污泥类别",
+  //   width: 30,
+  //   dataIndex: "category",
+  //   key: "category",
 
-  },
+  // },
   {
     title: "城市",
     width: 30,

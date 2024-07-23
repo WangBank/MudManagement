@@ -27,7 +27,7 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quality_jcsx")]
-        public IEnumerable<mud_quality_jcsx_view_model> get_mud_quality_jcsx(string? city, string? category)
+        public IEnumerable<mud_quality_jcsx_view_model> get_mud_quality_jcsx(string? city, string? category,string? location)
         {
             var query = _context.mud_quality_jcsx.AsNoTracking().Where(w=> !string.IsNullOrEmpty(w.youjizhi) || !string.IsNullOrEmpty(w.hanshaliang) || !string.IsNullOrEmpty(w.hanshuilv) || !string.IsNullOrEmpty(w.ph));
             if (!string.IsNullOrEmpty(city))
@@ -37,6 +37,10 @@ namespace MudManagement.Server.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 query = query.Where(w => w.category == category);
+            }
+            if (!string.IsNullOrEmpty(location))
+            {
+                query = query.Where(w => w.location != null && w.location.Contains(location));
             }
             var list = query.ToList().Select(s => new mud_quality_jcsx_view_model
             {
@@ -62,7 +66,7 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quality_zjs")]
-        public IEnumerable<mud_quality_zjs_view_model> get_mud_quality_zjs(string? city, string? category)
+        public IEnumerable<mud_quality_zjs_view_model> get_mud_quality_zjs(string? city, string? category,string? location)
         {
             var query = _context.mud_quality_zjs.AsNoTracking().Where(w=> !string.IsNullOrEmpty(w.zn) || !string.IsNullOrEmpty(w.cu) || !string.IsNullOrEmpty(w.As) || !string.IsNullOrEmpty(w.Pb) || !string.IsNullOrEmpty(w.cd) || !string.IsNullOrEmpty(w.cr) || !string.IsNullOrEmpty(w.ni) || !string.IsNullOrEmpty(w.hg) );
             if (!string.IsNullOrEmpty(city))
@@ -72,6 +76,10 @@ namespace MudManagement.Server.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 query = query.Where(w => w.category == category);
+            }
+            if (!string.IsNullOrEmpty(location))
+            {
+                query = query.Where(w => w.location != null && w.location.Contains(location));
             }
             var list = query.ToList().Select(s => new mud_quality_zjs_view_model
             {
@@ -100,7 +108,7 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quality_dhft")]
-        public IEnumerable<mud_quality_dhft_view_model> get_mud_quality_dhft(string? city, string? category)
+        public IEnumerable<mud_quality_dhft_view_model> get_mud_quality_dhft(string? city, string? category,string? location)
         {
             var query = _context.mud_quality_dhft.AsNoTracking().Where(w =>  !string.IsNullOrEmpty(w.e) || !string.IsNullOrEmpty(w.exi) || !string.IsNullOrEmpty(w.fei) || !string.IsNullOrEmpty(w.nai) || !string.IsNullOrEmpty(w.qu) || !string.IsNullOrEmpty(w.benbingbei) || !string.IsNullOrEmpty(w.wu)
                 || !string.IsNullOrEmpty(w.benbingbyingen) || !string.IsNullOrEmpty(w.benbingen) || !string.IsNullOrEmpty(w.benbingkyingen) || !string.IsNullOrEmpty(w.bi) || !string.IsNullOrEmpty(w.en) || !string.IsNullOrEmpty(w.erbenbingen) || !string.IsNullOrEmpty(w.yinbingbi) || !string.IsNullOrEmpty(w.yingen) || !string.IsNullOrEmpty(w.zl)
@@ -112,6 +120,10 @@ namespace MudManagement.Server.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 query = query.Where(w => w.category == category);
+            }
+            if (!string.IsNullOrEmpty(location))
+            {
+                query = query.Where(w => w.location != null && w.location.Contains(location));
             }
             var list = query.ToList().Select(s => new mud_quality_dhft_view_model
             {
@@ -150,7 +162,7 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quality_kss")]
-        public IEnumerable<mud_quality_kss_view_model> get_mud_quality_kss(string? city, string? category)
+        public IEnumerable<mud_quality_kss_view_model> get_mud_quality_kss(string? city, string? category,string? location)
         {
             var query = _context.mud_quality_kss.AsNoTracking().Where(w=>
                 !string.IsNullOrEmpty(w.shs) || !string.IsNullOrEmpty(w.aqms) || !string.IsNullOrEmpty(w.hacd) || !string.IsNullOrEmpty(w.hajec) || !string.IsNullOrEmpty(w.hajmd) || !string.IsNullOrEmpty(w.hamd) || !string.IsNullOrEmpty(w.hbsx) || !string.IsNullOrEmpty(w.hms) || !string.IsNullOrEmpty(w.klms) || !string.IsNullOrEmpty(w.lhms) || !string.IsNullOrEmpty(w.nfsx) || !string.IsNullOrEmpty(w.tms) || !string.IsNullOrEmpty(w.yfsx)
@@ -162,6 +174,10 @@ namespace MudManagement.Server.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 query = query.Where(w => w.category == category);
+            }
+            if (!string.IsNullOrEmpty(location))
+            {
+                query = query.Where(w => w.location != null && w.location.Contains(location));
             }
             var list = query.ToList().Select(s => new mud_quality_kss_view_model
             {
@@ -195,7 +211,7 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quality_xdfcw")]
-        public IEnumerable<mud_quality_xdfcw_view_model> get_mud_quality_xdfcw(string? city, string? category)
+        public IEnumerable<mud_quality_xdfcw_view_model> get_mud_quality_xdfcw(string? city, string? category,string? location)
         {
             var query = _context.mud_quality_xdfcw.AsNoTracking().Where(
                 w=>
@@ -208,6 +224,10 @@ namespace MudManagement.Server.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 query = query.Where(w => w.category == category);
+            }
+            if (!string.IsNullOrEmpty(location))
+            {
+                query = query.Where(w => w.location != null && w.location.Contains(location));
             }
             var list = query.ToList().Select(s => new mud_quality_xdfcw_view_model
             {
@@ -232,7 +252,7 @@ namespace MudManagement.Server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("get_mud_quality_zysx")]
-        public IEnumerable<mud_quality_zysx_view_model> get_mud_quality_zysx(string? city, string? category)
+        public IEnumerable<mud_quality_zysx_view_model> get_mud_quality_zysx(string? city, string? category,string? location)
         {
             var query = _context.mud_quality_zysx.AsNoTracking().Where(
                 w=>
@@ -245,6 +265,10 @@ namespace MudManagement.Server.Controllers
             if (!string.IsNullOrEmpty(category))
             {
                 query = query.Where(w => w.category == category);
+            }
+            if (!string.IsNullOrEmpty(location))
+            {
+                query = query.Where(w => w.location != null && w.location.Contains(location));
             }
             var list = query.ToList().Select(s => new mud_quality_zysx_view_model
             {
