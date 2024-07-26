@@ -19,7 +19,7 @@ export class baseStore {
       this.selected_year = selected_year;
     });
   }
-  @observable selected_chanlv: number|null;
+  @observable selected_chanlv: number | null;
   @action
   update_selected_chanlv(selected_chanlv: number) {
     runInAction(() => {
@@ -46,6 +46,7 @@ export class baseStore {
   @observable max_quality_kss: mud_quality_kss[] = [];
   @observable max_quality_xdfcw: mud_quality_xdfcw[] = [];
   @observable max_quality_zysx: mud_quality_zysx[] = [];
+  @observable max_quantity_wswn_czqk: mud_quantity_wswn_czqk[] = [];
 
   @action
   get_pigconfig_wswn_czqk_data(year: string, province: string) {
@@ -82,6 +83,142 @@ export class baseStore {
 
   @computed get DualAxesconfig_wswn_czqk_data() {
     return this.get_DualAxesconfig_wswn_czqk_data(this.selected_year);
+  }
+
+  @computed get DualAxesconfig_wswn_czqk_ztqk_data() {
+    return this.get_DualAxesconfig_wswn_czqk_ztqk_data();
+  }
+
+  @action
+  get_DualAxesconfig_wswn_czqk_ztqk_data() {
+    var uvBillData = [];
+    this.max_quantity_wswn_czqk.map((item) => {
+      var tdly = {
+        year: item.year,
+        value: 0,
+        type: "土地利用",
+      };
+      tdly.value = item.tdly;
+      uvBillData.push(tdly);
+
+      var jcly = {
+        year: item.year,
+        value: 0,
+        type: "建材利用",
+      };
+      jcly.value = item.jcly;
+      uvBillData.push(jcly);
+
+      var fs = {
+        year: item.year,
+        value: 0,
+        type: "焚烧",
+      };
+      fs.value = item.fs;
+      uvBillData.push(fs);
+
+      var tm = {
+        year: item.year,
+        value: 0,
+        type: "填埋",
+      };
+      tm.value = item.tm;
+      uvBillData.push(tm);
+
+      var qt = {
+        year: item.year,
+        value: 0,
+        type: "其他",
+      };
+      qt.value = item.qt;
+      uvBillData.push(qt);
+    });
+
+    var summary: Record<string, Record<string, number>> = {};
+
+    uvBillData.forEach((item) => {
+      if (!summary[item.year]) {
+        summary[item.year] = {};
+      }
+      if (!summary[item.year][item.type]) {
+        summary[item.year][item.type] = 0;
+      }
+      summary[item.year][item.type] += item.value;
+    });
+
+    var result: any[] = [];
+    for (const year in summary) {
+      for (const type in summary[year]) {
+        result.push({
+          year: year,
+          type,
+          value: Number.parseFloat(summary[year][type].toFixed(2)),
+        });
+      }
+    }
+
+    return result;
+  }
+
+  @computed get wswn_changliang_ztqk() {
+    var data = this.get_wswn_changliang_ztqk();
+    return data;
+  }
+
+  @computed get wswn_chanlv_ztqk() {
+    var data = this.get_wswn_chanlv_ztqk();
+    return data;
+  }
+
+  @action
+  get_wswn_chanlv_ztqk() {
+    var yearlyData: Record<
+      string,
+      { totalChanliang: number; totalWushuiliang: number }
+    > = {};
+
+    // 步骤1: 累加每个年份的chanliang和wushuiliang
+    this.max_quantity_wswn.forEach((item) => {
+      if (yearlyData[item.year]) {
+        yearlyData[item.year].totalChanliang += item.chanliang;
+        yearlyData[item.year].totalWushuiliang += item.wushuiliang;
+      } else {
+        yearlyData[item.year] = {
+          totalChanliang: item.chanliang,
+          totalWushuiliang: item.wushuiliang,
+        };
+      }
+    });
+
+    // 步骤2: 生成包含比率的新数组
+    var ratioArray: any[] = Object.keys(yearlyData).map((year) => {
+      const { totalChanliang, totalWushuiliang } = yearlyData[year];
+      var chanlv = totalWushuiliang > 0 ? totalChanliang / totalWushuiliang : 0;
+      return { year, chanlv };
+    });
+
+    return ratioArray;
+  }
+
+  @action
+  get_wswn_changliang_ztqk() {
+    var yearlySummary: Record<string, number> = {};
+    this.max_quantity_wswn.forEach((item) => {
+      if (yearlySummary[item.year]) {
+        yearlySummary[item.year] += item.chanliang;
+      } else {
+        yearlySummary[item.year] = item.chanliang;
+      }
+    });
+
+    // 步骤3: 将累计对象转换为数组
+    var summaryArray: any[] = Object.entries(yearlySummary).map(
+      ([year, total_chanliang]) => {
+        return { year: year, chanliang: total_chanliang };
+      }
+    );
+
+    return summaryArray;
   }
 
   @action
@@ -131,30 +268,8 @@ export class baseStore {
         uvBillData.push(qt);
       });
 
-    const maxValueObject = uvBillData.reduce(
-      (max, current) => {
-        return current.value > max.value ? current : max;
-      },
-      { value: -Infinity }
-    );
 
-    const config = {
-      xField: "province",
-      children: [
-        {
-          data: uvBillData,
-          type: "interval",
-          yField: "value",
-          stack: true,
-          colorField: "type",
-          style: { maxWidth: 80 },
-          scale: { y: { domainMax: maxValueObject.value * 1.5 } },
-          interaction: { elementHighlightByColor: { background: true } },
-        },
-      ],
-    };
-
-    return config;
+    return uvBillData;
   }
 
   @computed get boxconfig_wswn_yjz() {
@@ -206,7 +321,6 @@ export class baseStore {
   }
 
   @computed get boxconfig_gcnj_yjz() {
-    console.log(this.get_box_jcsx_data("工程泥浆", "youjizhi"));
     return this.get_box_jcsx_data("工程泥浆", "youjizhi");
   }
 
@@ -464,7 +578,7 @@ export class baseStore {
     pathname: string,
     province: string = "",
     year: string = "",
-    chanlv: number|null = null
+    chanlv: number | null = null
   ) {
     if (pathname == "/mudquantity/gqwn/chanshengqingkuang") {
       await this.get_mud_quantity_gqwn(province, year, chanlv);
@@ -488,6 +602,12 @@ export class baseStore {
     const data = await response.json();
     runInAction(() => {
       this.mud_quantity_wswn_czqk = data;
+      if (
+        this.max_quantity_wswn_czqk.length == 0 ||
+        this.max_quantity_wswn_czqk.length < data.length
+      ) {
+        this.max_quantity_wswn_czqk = data;
+      }
     });
   }
 
@@ -509,14 +629,20 @@ export class baseStore {
   }
 
   @action
-  async get_mud_quantity_gqwn(province: string, year: string, chanlv:number|null) {
-    let url = "MudQuantity/get_mud_quantity_gqwn?province=" + province + "&year=" + year;
+  async get_mud_quantity_gqwn(
+    province: string,
+    year: string,
+    chanlv: number | null
+  ) {
+    let url =
+      "MudQuantity/get_mud_quantity_gqwn?province=" +
+      province +
+      "&year=" +
+      year;
     if (chanlv) {
       url += "&chanlv=" + chanlv;
     }
-    const response = await fetch(
-      url
-    );
+    const response = await fetch(url);
     const data = await response.json();
     runInAction(() => {
       this.mud_quantity_gqwn = data;

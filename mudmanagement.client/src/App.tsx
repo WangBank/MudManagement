@@ -143,7 +143,7 @@ const App: React.FC<any> =
 
                                 }
                                 else {
-                                    store.get_chart_data(item.path || '/', '', '');
+                                    store.get_chart_data(item.path || '/');
                                     if (item.path == '/mudquantity') {
                                         setPathname('/mudquantity/wswn/chanshengqingkuang');
                                     }
@@ -164,7 +164,7 @@ const App: React.FC<any> =
                         <ProCard
                             style={{
                                 height: '80vh',
-                                minHeight: 800,
+                                minHeight: 900,
                                 // maxHeight: 400,
                                // overflowY: 'auto',
                             }}

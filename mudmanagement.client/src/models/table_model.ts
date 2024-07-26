@@ -42,19 +42,19 @@ export const mud_quantity_wswn_columns: TableColumnsType<mud_quantity_wswn> = [
 export const mud_quantity_gqwn_columns: TableColumnsType<mud_quantity_gqwn> = [
   ...base_quantity_entity_model,
   {
-    title: "管道长度",
+    title: "管道长度 (km)",
     width: 30,
     dataIndex: "guandaochangdu",
     key: "guandaochangdu",
   },
   {
-    title: "产量 (tDS/a)",
+    title: "产量 (m³/a)",
     width: 30,
     dataIndex: "chanliang",
     key: "chanliang",
   },
   {
-    title: "产率 (tDS/km)",
+    title: "产率 (m³/km·a)",
     width: 30,
     dataIndex: "chanlv",
     key: "chanlv",
